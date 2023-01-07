@@ -3,7 +3,7 @@ const port = !Number.isNaN(Number(Deno.env.get("PORT")))
   ? Number(Deno.env.get("PORT"))
   : 3000;
 
-export async function serve({
+export async function Server({
   middlewares,
 }: {
   middlewares: Array<Oak.Middleware>;

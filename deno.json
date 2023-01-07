@@ -1,4 +1,7 @@
 {
+    "tasks": {
+        "example": "deno run --allow-all ./example/example.ts" 
+    },
     "compilerOptions": {
         "allowJs": false
     }
