@@ -1,4 +1,4 @@
-import { Log } from "../deps.ts";
+import { Log } from "../../deps.ts";
 Log.setup({
   handlers: {
     console: new Log.handlers.ConsoleHandler("DEBUG"),
