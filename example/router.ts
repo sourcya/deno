@@ -1,6 +1,6 @@
-import { Oak } from "../deps.ts";
+import { Connect } from "../deps.ts";
 import { hello } from "./controllers.ts";
-const router = new Oak.Router();
+const router = new Connect.Routers.Router();
 
 router.get("/hello", hello);
 
