@@ -1,4 +1,7 @@
 {
     "deno.enable": true,
-    "deno.unstable": true
-}
+    "deno.unstable": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  }
+  

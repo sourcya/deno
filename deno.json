@@ -1,6 +1,6 @@
 {
     "tasks": {
-        "example": "deno run --allow-all ./example/example.ts" 
+        "example": "deno run --allow-all --watch ./example/example.ts" 
     },
     "compilerOptions": {
         "allowJs": false
