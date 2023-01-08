@@ -1,7 +1,8 @@
 import { Oak } from "../../deps.ts";
-
-export const Socket = new Oak.Router().get("/socket", (ctx) => {
-  ctx.response.body = {
-    error: "Socket Not Implemented!",
-  };
-});
+export const Socket = (Router: Oak.Router) => {
+  return new Oak.Router().use(
+    "/socket",
+    Router.routes(),
+    Router.allowedMethods()
+  );
+};
