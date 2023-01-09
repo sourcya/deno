@@ -1,5 +1,5 @@
-import { Connect } from "../deps.ts";
+import { Oak } from "../deps.ts";
 import { hello } from "./controllers.ts";
-const rest = new Connect.Oak.Router();
-rest.get("/hello", hello);
+const rest = new Oak.Router().get("/hello", (ctx) => hello(ctx));
+//.post("/telamatics/:topic", (ctx) => telematics(ctx));
 export { rest };

@@ -5,21 +5,26 @@ const port = !Number.isNaN(Number(Deno.env.get("PORT")))
   : 3000;
 export interface ConnectServerOptions {
   middlewares: Oak.Middleware[];
-  routers: Oak.Router[];
+  routes: {
+    prefix: string;
+    router: Oak.Router;
+  }[];
 }
-export async function Server(
-  ConnectServerOptions: ConnectServerOptions
-): Promise<void> {
+export async function Server(ConnectServerOptions: ConnectServerOptions) {
   try {
     const OakServer = new Oak.Application();
     ConnectServerOptions.middlewares.forEach((middleware) => {
       OakServer.use(middleware);
     });
-    ConnectServerOptions.routers.forEach((router) => {
-      OakServer.use(router.routes());
-      OakServer.use(router.allowedMethods());
+    const router = new Oak.Router();
+    ConnectServerOptions.routes.forEach((route) => {
+      router.use(
+        route.prefix,
+        route.router.routes(),
+        route.router.allowedMethods()
+      );
     });
-
+    OakServer.use(router.routes());
     Connect.Utils.log.warning(`Listening on ${port}`);
     return await OakServer.listen({ port });
   } catch (e) {
