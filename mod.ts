@@ -1,1 +1,1 @@
-export * as Connect from "./Connect/mod.ts"
+export * as Connect from "./Connect/mod.ts";

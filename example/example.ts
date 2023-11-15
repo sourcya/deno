@@ -1,8 +1,8 @@
 import { Connect } from "../deps.ts";
 import { rest } from "./rest.ts";
 import { socket } from "./socket.ts";
-await Connect.Server({
-  middlewares: [Connect.Mwares.RequestLogger],
+await Connect.serve({
+  middlewares: [Connect.Mwares.requestLogger],
   routes: [
     {
       prefix: "/rest",

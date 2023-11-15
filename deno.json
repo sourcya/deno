@@ -1,7 +1,7 @@
 {
     "tasks": {
         "example": "deno run --allow-all --watch ./example/example.ts",
-        "ws-client": "deno run --allow-all ./sandbox/ws-client.ts"
+        "ws-client": "deno run --allow-all --watch ./example/sandbox/ws-client.ts"
     },
     "compilerOptions": {
         "allowJs": false

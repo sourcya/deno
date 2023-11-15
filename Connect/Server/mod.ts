@@ -1,22 +1,24 @@
-import { Oak, Connect } from "../../deps.ts";
+import { oak } from "../../deps.ts";
+import { Utils } from "../mod.ts";
 
 const port = !Number.isNaN(Number(Deno.env.get("PORT")))
   ? Number(Deno.env.get("PORT"))
   : 3000;
+
 export interface ConnectServerOptions {
-  middlewares: Oak.Middleware[];
+  middlewares: oak.Middleware[];
   routes: {
     prefix: string;
-    router: Oak.Router;
+    router: oak.Router;
   }[];
 }
-export async function Server(ConnectServerOptions: ConnectServerOptions) {
+export async function serve(ConnectServerOptions: ConnectServerOptions) {
   try {
-    const OakServer = new Oak.Application();
+    const oakServer = new oak.Application();
     ConnectServerOptions.middlewares.forEach((middleware) => {
-      OakServer.use(middleware);
+      oakServer.use(middleware);
     });
-    const router = new Oak.Router();
+    const router = new oak.Router();
     ConnectServerOptions.routes.forEach((route) => {
       router.use(
         route.prefix,
@@ -24,11 +26,11 @@ export async function Server(ConnectServerOptions: ConnectServerOptions) {
         route.router.allowedMethods()
       );
     });
-    OakServer.use(router.routes());
-    Connect.Utils.log.warning(`Listening on ${port}`);
-    return await OakServer.listen({ port });
+    oakServer.use(router.routes());
+    Utils.logger.warning(`Listening on ${port}`);
+    return await oakServer.listen({ port });
   } catch (e) {
-    Connect.Utils.log.error(`${e}`);
-    Connect.Utils.log.critical(`Server is aborting!`);
+    Utils.logger.error(`${e}`);
+    Utils.logger.critical(`Server is aborting!`);
   }
 }
